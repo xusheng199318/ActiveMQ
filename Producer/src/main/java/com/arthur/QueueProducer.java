@@ -1,8 +1,11 @@
 package com.arthur;
 
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
+
 
 public class QueueProducer {
 

@@ -34,8 +34,8 @@ public class SpringActive {
 
     @Test
     public void testSpringProducer() {
+        String msg = "Spring Hello World";
         jmsTemplate.send(destination, session -> {
-            String msg = "Hello Spring World";
             return session.createTextMessage(msg);
         });
     }

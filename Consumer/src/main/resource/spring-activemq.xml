@@ -16,17 +16,21 @@
     </bean>
 
     <bean id="springConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
-        <property name="clientId" value="client_pt"/>
+        <property name="clientId" value="client_01"/>
         <property name="targetConnectionFactory" ref="mqConnectionPool"/>
     </bean>
 
-    <!--配置生产者-->
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="springConnectionFactory"/>
-     </bean>
+    <!--配置消费者-->
+    <bean id="myMessageListener" class="com.arthur.MyMessageListener"/>
 
     <bean id="test-queue" class="org.apache.activemq.command.ActiveMQQueue">
         <constructor-arg value="test-queue"/>
+    </bean>
+
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="springConnectionFactory"/>
+        <property name="destination" ref="test-queue"/>
+        <property name="messageListener" ref="myMessageListener"/>
     </bean>
 
 
